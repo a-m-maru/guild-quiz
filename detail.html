@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ギルド適性検査 詳細版｜タイプ診断＋詳細レポート</title>
+<meta name="description" content="ご購入ありがとうございます。20の質問に答えて、あなたの職業をさらに4つのタイプに分けて詳しく診断します。">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231b2130'/%3E%3Cpath d='M32 8l4.5 18.5L55 30l-18.5 4.5L32 55l-4.5-20.5L9 30l18.5-4.5z' fill='none' stroke='%23f8f9fb' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+html{-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
+:root{
+  --bg:#fbf7f0; --surface:#ffffff; --ink:#221a2e; --muted:#6b6178; --line:#e4dcd0; --ink-inv:#fffdf9;
+  --hero:#e8492b; --cleric:#f0a400; --mage:#8b5cf6; --paladin:#2f8fe0;
+  --hero2:#ffb648; --cleric2:#fff27a; --mage2:#ff8ae6; --paladin2:#7fe0ff;
+  --ink-rgb:34,26,46; --hero-rgb:232,73,43; --cleric-rgb:240,164,0; --mage-rgb:139,92,246; --paladin-rgb:47,143,224;
+  --hero2-rgb:255,182,72; --cleric2-rgb:255,242,122; --mage2-rgb:255,138,230; --paladin2-rgb:127,224,255;
+  --btn-ink:#221a2e;
+  --serif:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
+  --sans:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#171129; --surface:#221a35; --ink:#f2eefb; --muted:#ab9fc4; --line:#392c52; --ink-inv:#171129;
+    --hero:#ff7a54; --cleric:#ffcf4d; --mage:#b79dff; --paladin:#7cc4ff;
+    --hero2:#ffb648; --cleric2:#fff27a; --mage2:#ff8ae6; --paladin2:#7fe0ff;
+    --ink-rgb:242,238,251; --hero-rgb:255,122,84; --cleric-rgb:255,207,77; --mage-rgb:183,157,255; --paladin-rgb:124,196,255;
+    --hero2-rgb:255,182,72; --cleric2-rgb:255,242,122; --mage2-rgb:255,138,230; --paladin2-rgb:127,224,255;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#171129; --surface:#221a35; --ink:#f2eefb; --muted:#ab9fc4; --line:#392c52; --ink-inv:#171129;
+  --hero:#ff7a54; --cleric:#ffcf4d; --mage:#b79dff; --paladin:#7cc4ff;
+  --hero2:#ffb648; --cleric2:#fff27a; --mage2:#ff8ae6; --paladin2:#7fe0ff;
+  --ink-rgb:242,238,251; --hero-rgb:255,122,84; --cleric-rgb:255,207,77; --mage-rgb:183,157,255; --paladin-rgb:124,196,255;
+  --hero2-rgb:255,182,72; --cleric2-rgb:255,242,122; --mage2-rgb:255,138,230; --paladin2-rgb:127,224,255;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.8;padding-inline:16px;padding-block:24px 56px;overflow-x:hidden}
+body[data-job="DJ"]{--tc:var(--hero);--tc2:var(--hero2);--tc-rgb:var(--hero-rgb);--tc2-rgb:var(--hero2-rgb)}
+body[data-job="DK"]{--tc:var(--paladin);--tc2:var(--paladin2);--tc-rgb:var(--paladin-rgb);--tc2-rgb:var(--paladin2-rgb)}
+body[data-job="SJ"]{--tc:var(--mage);--tc2:var(--mage2);--tc-rgb:var(--mage-rgb);--tc2-rgb:var(--mage2-rgb)}
+body[data-job="SK"]{--tc:var(--cleric);--tc2:var(--cleric2);--tc-rgb:var(--cleric-rgb);--tc2-rgb:var(--cleric2-rgb)}
+.aura{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:-1}
+.aura span{position:absolute;width:58vmax;height:58vmax;border-radius:50%;filter:blur(54px);opacity:.32;background:radial-gradient(circle,rgba(var(--tc-rgb,var(--ink-rgb)),1),transparent 70%);transition:background 1.2s ease}
+.aura span:nth-child(1){top:-24vmax;left:-18vmax;animation:auraDrift1 24s ease-in-out infinite alternate}
+.aura span:nth-child(2){bottom:-26vmax;right:-16vmax;background:radial-gradient(circle,rgba(var(--tc2-rgb,var(--ink-rgb)),1),transparent 70%);animation:auraDrift2 30s ease-in-out infinite alternate}
+@keyframes auraDrift1{from{transform:translate(0,0) scale(1)}to{transform:translate(6vmax,8vmax) scale(1.15)}}
+@keyframes auraDrift2{from{transform:translate(0,0) scale(1)}to{transform:translate(-7vmax,-6vmax) scale(1.1)}}
+@keyframes riseIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sceneIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes popIn{0%{opacity:0;transform:scale(.7) rotate(-8deg)}55%{opacity:1;transform:scale(1.08) rotate(3deg)}80%{transform:scale(.97) rotate(-1deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes cellPop{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes glowPulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.6;transform:scale(1.12)}}
+@keyframes pickPulse{0%{transform:scale(1)}45%{transform:scale(1.035)}100%{transform:scale(1)}}
+@keyframes pipPop{0%{transform:scaleY(1)}40%{transform:scaleY(2.4)}100%{transform:scaleY(1)}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .aura{display:none}
+}
+.wrap{max-width:640px;margin-inline:auto;position:relative}
+h1,h2,h3{font-family:var(--serif);font-weight:800;line-height:1.35;margin:0;text-wrap:balance}
+p{margin:0}
+.eyebrow{font-size:.75rem;letter-spacing:.2em;color:var(--muted);font-weight:500}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.btn{background:linear-gradient(135deg,var(--tc,var(--ink)),var(--tc2,var(--ink)));color:var(--ink-inv);border:0;border-radius:8px;padding:14px 28px;font-weight:700;letter-spacing:.08em;transition:transform .15s ease,box-shadow .15s ease,opacity .15s ease;box-shadow:0 8px 20px -10px rgba(var(--tc-rgb,var(--ink-rgb)),.65)}
+body[data-job] .btn:not(.ghost){color:var(--btn-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--tc,var(--ink));box-shadow:none}
+.btn:hover{opacity:.92;transform:translateY(-2px);box-shadow:0 12px 26px -10px rgba(var(--tc-rgb,var(--ink-rgb)),.75)}
+.btn.ghost:hover{box-shadow:none}
+.btn:active{transform:translateY(0) scale(.97)}
+a.btn{display:inline-block;text-decoration:none;line-height:1.8}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+
+.start .eyebrow{animation:riseIn .5s both}
+.start h1{font-size:clamp(1.9rem,7.6vw,2.6rem);margin-block:10px 14px;animation:riseIn .6s .06s both;color:var(--ink)}
+.start .lead{color:var(--muted);max-width:32em;animation:riseIn .6s .13s both}
+@supports (background-clip:text) or (-webkit-background-clip:text){
+  .res-top h1{background:linear-gradient(120deg,var(--tc,var(--ink)) 25%,var(--tc2,var(--ink)) 90%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+}
+
+.jobpick{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;animation:riseIn .6s .2s both}
+.jcell{background:linear-gradient(160deg,rgba(var(--tc-rgb),.12),var(--surface) 55%);border:1.5px solid rgba(var(--tc-rgb),.35);border-radius:10px;padding:18px 10px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;color:var(--tc);transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+.jcell:hover{transform:translateY(-3px);box-shadow:0 10px 24px -14px rgba(var(--tc-rgb),.6)}
+.jcell svg{width:40px;height:40px}
+.jcell b{font-family:var(--serif);font-size:1.1rem;color:var(--ink)}
+.jcell small{font-size:.75rem;color:var(--muted)}
+.t-hero{--tc:var(--hero);--tc-rgb:var(--hero-rgb)} .t-cleric{--tc:var(--cleric);--tc-rgb:var(--cleric-rgb)} .t-mage{--tc:var(--mage);--tc-rgb:var(--mage-rgb)} .t-paladin{--tc:var(--paladin);--tc-rgb:var(--paladin-rgb)}
+
+.qhead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;animation:riseIn .4s both}
+.qnum{font-family:var(--serif);font-weight:700;font-size:1.1rem;font-variant-numeric:tabular-nums}
+.pips{display:grid;grid-template-columns:repeat(20,1fr);gap:3px;margin-bottom:34px;animation:riseIn .4s .04s both}
+.pips i{height:5px;border-radius:2px;background:var(--line);transition:background-color .25s ease}
+.pips i.done{background:var(--ink)}
+.pips i.now{background:var(--tc,var(--muted));box-shadow:0 0 8px rgba(var(--tc-rgb,0,0,0),.6)}
+.pips i.pop{animation:pipPop .35s ease}
+.scene{font-size:clamp(1.3rem,5.2vw,1.65rem);margin-bottom:26px;animation:sceneIn .45s .08s both}
+.opts{display:flex;flex-direction:column;gap:12px}
+.opt{text-align:left;background:var(--surface);border:1.5px solid var(--line);border-left:4px solid var(--line);border-radius:8px;padding:18px 18px;font-size:1rem;line-height:1.7;transition:border-color .15s,transform .15s,box-shadow .15s;animation:riseIn .45s both}
+.opt:nth-child(1){animation-delay:.14s}
+.opt:nth-child(2){animation-delay:.22s}
+.opt:hover{border-color:var(--tc,var(--ink));border-left-color:var(--tc,var(--ink));transform:translateY(-3px);box-shadow:0 12px 26px -16px rgba(var(--tc-rgb,var(--ink-rgb)),.55)}
+.opt:active{transform:scale(.985)}
+.opt.picked{border-color:var(--tc,var(--ink));border-left-color:var(--tc,var(--ink));background:linear-gradient(135deg,var(--tc,var(--ink)),var(--tc2,var(--ink)));color:var(--btn-ink,var(--ink));animation:pickPulse .3s ease}
+.back{margin-top:22px;background:none;border:0;color:var(--muted);font-size:.85rem;padding:6px 0;text-decoration:underline;text-underline-offset:3px;animation:riseIn .5s .3s both}
+.back[disabled]{visibility:hidden}
+
+.res-top{text-align:center;padding-block:8px 20px}
+.res-top .eyebrow{animation:riseIn .5s both}
+.res-top .badge{width:86px;height:86px;margin:0 auto 10px;color:var(--tc);position:relative;animation:popIn .6s .08s both}
+.res-top .badge::before{content:"";position:absolute;inset:-20%;border-radius:50%;background:radial-gradient(circle,rgba(var(--tc2-rgb,var(--tc-rgb)),.45),rgba(var(--tc-rgb),.2) 55%,transparent 75%);animation:glowPulse 2.4s 1s ease-in-out infinite;z-index:-1}
+.res-top .badge svg{width:100%;height:100%}
+.chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;border:1px solid var(--tc);color:var(--tc);border-radius:4px;padding:1px 10px;margin-bottom:10px;animation:riseIn .5s .1s both}
+.res-top .jobline{color:var(--muted);font-size:.9rem;animation:riseIn .5s .14s both}
+.res-top h1{font-size:clamp(2.1rem,9vw,2.8rem);color:var(--tc);margin-block:4px 6px;animation:riseIn .55s .18s both}
+.res-top .tag{font-family:var(--serif);font-size:1.1rem;font-weight:700;animation:riseIn .5s .26s both}
+.sec{margin-top:32px;animation:riseIn .55s both}
+.sec:nth-of-type(1){animation-delay:.06s}
+.sec:nth-of-type(2){animation-delay:.12s}
+.sec:nth-of-type(3){animation-delay:.18s}
+.sec:nth-of-type(4){animation-delay:.24s}
+.sec:nth-of-type(5){animation-delay:.3s}
+.sec:nth-of-type(n+6){animation-delay:.36s}
+.sec h3{font-size:1.05rem;margin-bottom:10px}
+.sec p{color:var(--ink)}
+.sec .lab{display:block;font-size:.72rem;letter-spacing:.16em;color:var(--muted);font-weight:500;margin-bottom:2px}
+.bars{display:flex;flex-direction:column;gap:18px}
+.bar-l{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:5px;font-variant-numeric:tabular-nums}
+.track{height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,var(--tc),var(--tc2,var(--tc)));border-radius:5px 0 0 5px;width:0;transition:width 1.1s cubic-bezier(.22,1,.36,1)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+.pair{background:linear-gradient(160deg,rgba(var(--tc-rgb),.08),var(--surface) 55%);border:1px solid rgba(var(--tc-rgb),.3);border-radius:8px;padding:16px 18px;transition:transform .18s ease,box-shadow .18s ease}
+.pair:hover{transform:translateY(-3px);box-shadow:0 10px 22px -14px rgba(var(--tc-rgb),.5)}
+.pair b{font-family:var(--serif);color:var(--tc)}
+.pair span.k{display:block;font-size:.72rem;letter-spacing:.14em;color:var(--muted);margin-bottom:2px}
+.foot{margin-top:38px}
+.note{margin-top:22px;font-size:.78rem;color:var(--muted)}
+.toast{font-size:.85rem;color:var(--muted);min-height:1.6em;margin-top:10px}
+.back-home{margin-top:30px;font-size:.82rem}
+.back-home a{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="aura" aria-hidden="true"><span></span><span></span></div>
+<div class="wrap" id="app"></div>
+
+<script>
+const ICON={
+ DJ:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M28 16 32 6l4 10v27h-8z"/><path d="M20 43h24M32 43v11"/><circle cx="32" cy="57" r="2"/></svg>',
+ SK:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><circle cx="32" cy="20" r="11"/><path d="M32 31v27M25 44h14M32 9v22M21 20h22"/></svg>',
+ SJ:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M32 7l4.5 18.5L55 30l-18.5 4.5L32 55l-4.5-20.5L9 30l18.5-4.5z"/></svg>',
+ DK:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M32 6l20 8v18c0 14-10 22-20 26-10-4-20-12-20-26V14z"/><path d="M32 18v26M22 28h20"/></svg>'
+};
+const TYPES={
+ DJ:{cls:'hero',name:'勇者',tag:'道を切り拓く者',
+  mate:'聖職者',mateWhy:'無茶をした後の回復と、立ち止まる合図をくれます。',
+  clash:'聖騎士',clashWhy:'守りたい聖騎士と突っ込みたいあなたで、方針が割れやすい組み合わせです。'},
+ DK:{cls:'paladin',name:'聖騎士',tag:'誓いを護り貫く者',
+  mate:'魔法使い',mateWhy:'後方から的確に援護してくれ、あなたの負担を減らします。',
+  clash:'勇者',clashWhy:'先に突っ込む勇者を止めたくて、たびたび衝突します。'},
+ SJ:{cls:'mage',name:'魔法使い',tag:'真理を読み解く者',
+  mate:'聖騎士',mateWhy:'守ってもらえるので、詠唱と研究に集中できます。',
+  clash:'聖職者',clashWhy:'感情を重んじる聖職者と理屈を優先するあなたは、言葉がすれ違うことがあります。'},
+ SK:{cls:'cleric',name:'聖職者',tag:'寄り添い癒す者',
+  mate:'勇者',mateWhy:'あなたが背中を支えるほど、勇者は遠くまで進めます。',
+  clash:'魔法使い',clashWhy:'理屈を優先する魔法使いに、気持ちが伝わりにくいことがあります。'}
+};
+const SUB={"DJRY":{"n":"戦略の英雄","t":"先頭で勝ち筋を計算する司令塔","d":"前線に立ちながら、勝ち筋を計算できる頭脳派の勇者です。勢いだけで突っ込まず、状況を素早く読んで最短の一手を選びます。人を率いる場面では、頼れる司令塔になります。"},"DJRI":{"n":"孤高の開拓者","t":"ひとりで最適な道を切り拓く","d":"誰にも頼らず、自分で調べ、自分で決めて、未知の道へ進む勇者です。効率と結果を重んじ、静かに成果を積み上げます。仲間を頼る練習をすると、さらに遠くまで行けます。"},"DJEY":{"n":"太陽の勇者","t":"熱と笑顔で皆を引っ張る旗印","d":"情熱と明るさで周囲を巻き込む、旗印のような勇者です。あなたの笑顔と熱意が、パーティ全員の背中を押します。感情が先に立つと無茶をしやすいので、信頼できる参謀を隣に置いてください。"},"DJEI":{"n":"静かなる反逆者","t":"内に炎を秘め、ここぞで燃える","d":"普段は物静かですが、内側に強い炎を抱えている勇者です。譲れない一線を越えられたとき、誰よりも大胆に動きます。その熱を言葉にして仲間に見せると、理解者が増えます。"},"DKRY":{"n":"鉄の団長","t":"規律と統率で全員を守る指揮官","d":"規律と戦術で仲間を統率する、指揮官タイプの聖騎士です。役割分担と手順を整え、全員が力を出せる状態を作ります。厳しさの裏に、全員を帰還させるという強い責任感があります。"},"DKRI":{"n":"無言の盾","t":"表に出ず、必ずそこに立つ守護者","d":"表に出ず、必要な場所に必ず立っている守護者です。多くを語らず、確実な仕事で信頼を得ます。感謝を求めない分、自分の疲れに気づきにくいので、意識して休息を取ってください。"},"DKEY":{"n":"義の騎士","t":"正義感で前に出て皆を鼓舞する","d":"正義感と熱さで前に立ち、仲間を鼓舞する聖騎士です。困っている人を見ると体が先に動きます。あなたの叫びが、折れかけた部隊の士気を立て直します。"},"DKEI":{"n":"誓いの番人","t":"たったひとつの誓いを守り抜く","d":"たったひとつの誓いを、静かに、生涯かけて守り抜く聖騎士です。派手さはなくても、あなたの約束は誰よりも重く、揺るぎません。守るものを広げすぎず、大切な相手に気持ちを伝える時間を持ちましょう。"},"SJRY":{"n":"賢者の教師","t":"知を惜しみなく分け与える導き手","d":"得た知識を惜しみなく共有し、人を導く魔法使いです。難しいことを分かりやすく説明でき、周りが自然と集まります。教えることで、あなた自身の理解もいっそう深まります。"},"SJRI":{"n":"深淵の研究者","t":"塔にこもって真理を掘り下げる","d":"塔にこもって真理を掘り下げる、探求特化の魔法使いです。誰も気づかない法則や矛盾を見つけ出します。成果を外に出す機会を意識して作ると、あなたの発見が世界を動かします。"},"SJEY":{"n":"奇術の魔導士","t":"ひらめきで場を華やかに変える","d":"ひらめきと表現力で、場を華やかに変える魔法使いです。理屈より「面白い」を大切にし、人を驚かせる発想を次々と生みます。飽きが早いので、最後まで形にする相棒がいると強力です。"},"SJEI":{"n":"夢見る錬金術師","t":"想像力で自分だけの世界を作る","d":"直感と想像力で、自分だけの世界と発明を生み出す魔法使いです。ひとりの時間に、他の誰にも思いつかないものが育ちます。作ったものをそっと見せる相手がいると、才能が花開きます。"},"SKRY":{"n":"聖堂の導き手","t":"筋道の通った言葉で人を導く","d":"教えを分かりやすく伝え、迷う人を導く聖職者です。人前で話す力と、筋道立てた助言に優れます。正しさだけでなく、相手の気持ちに寄せた言葉を添えると、いっそう慕われます。"},"SKRI":{"n":"静謐の賢僧","t":"観察と洞察で影から支える","d":"観察と洞察で、影から静かに人を支える聖職者です。誰も気づかない変化を見つけ、必要な一言だけを届けます。自分の意見を出す機会を、少しだけ増やしてみてください。"},"SKEY":{"n":"慈愛の癒し手","t":"温かさで皆の心を包む中心","d":"温かさで場の中心になり、皆の心を包む聖職者です。あなたがいるだけで、パーティに安心感が生まれます。全員のケアで疲れ切らないよう、自分の回復も予定に入れましょう。"},"SKEI":{"n":"祈りの隠者","t":"ひとりひとりにそっと寄り添う","d":"一人ひとりにそっと寄り添い、静かに祈る聖職者です。大勢よりも、目の前の誰かと深く向き合うことを大切にします。あなたの優しさは、必要な人にきちんと届いています。"}};
+const REPORT={"DJ":[["恋愛・人間関係","好きになると一直線で、駆け引きより素直な言葉で気持ちを伝えます。相手のペースを待つのが苦手なので、返事を急がせていないか振り返ると長続きします。友人関係でも「行こう」と誘う側になりやすく、あなたの一声で始まる関係がたくさんあるはずです。"],["仕事・学び","新規事業、立ち上げ、営業、現場など、正解のない場所で力を発揮します。反対に、細かなルールが多い定型業務では息切れしがちです。最初の2割で方向を決め、残りは走りながら直す進め方が合います。"],["戦い方","先頭で敵の陣形を崩す切り込み役です。最初の一撃で流れを作れますが、深追いすると孤立します。合図を決めておき、仲間が追いつくのを待つ場面を作ってください。"],["成長のヒント","「準備は臆病ではなく、勝つための助走」と捉え直してみてください。週に一度、直感で動いた結果を振り返る習慣が、あなたの直感を精度の高い武器に変えます。"]],"DK":[["恋愛・人間関係","誠実で、一度結んだ約束を大切にします。愛情は言葉より行動で示すタイプです。頼られると嬉しい反面、弱音を見せるのが苦手なので、たまには「助けて」と口にすると、相手は喜びます。"],["仕事・学び","責任ある立場や、チームを守る役割に向いています。現場監督、教育、医療・介護、人事、品質管理など、人と安全を預かる仕事で信頼されます。引き受けすぎて抱え込みやすいので、任せる相手を決めておくと長く続きます。"],["戦い方","前線で敵を引き受ける盾です。仲間の背中を守るほど力が出ます。ただし守りに徹しすぎると好機を逃すため、勝ち筋を作る味方に切り替えの合図をもらうと最強です。"],["成長のヒント","「守る」対象に、自分を入れてください。休むことも任務のうちです。誓いの数を絞って優先順位をつけると、大切な誓いを確実に守れるようになります。"]],"SJ":[["恋愛・人間関係","一緒にいて楽な人や、好きな話をたっぷりできる関係を好みます。自分の世界を尊重してくれる相手と相性が良いです。気持ちを説明せず「察してほしい」と思いがちなので、短くても言葉にすると誤解が減ります。"],["仕事・学び","研究、開発、分析、企画、設計、執筆など、深く考える仕事が向いています。ひとりで集中できる時間が確保できると成果が伸びます。成果の共有を後回しにしやすいので、途中経過を小出しに見せる工夫が効きます。"],["戦い方","後衛から戦況を読み、弱点を突く火力・支援役です。準備した分だけ強くなります。詠唱中は無防備なので、守ってくれる相棒と役割分担を決めておくと安定します。"],["成長のヒント","「完成してから見せる」を「途中で見せる」に変えてみてください。他人の視点が入るほど、あなたの発想は現実に届く形になります。"]],"SK":[["恋愛・人間関係","相手の変化に気づき、そっと寄り添えます。長く続く穏やかな関係を築くのが得意です。ただ、自分の希望を後回しにしがちなので、小さなお願いから口にする練習をすると、対等な関係になります。"],["仕事・学び","教育、相談、医療・福祉、人事、コーチング、運営サポートなど、人の力を引き出す仕事に向いています。全体を見て調整する役割は、あなたにしかできない価値です。断る場面をあらかじめ決めておくと、消耗を防げます。"],["戦い方","後方で仲間の状態を見守り、必要なときに回復と支援を差し出します。倒れそうな仲間に最初に気づけるのが強みです。慎重すぎて出遅れる場面では、「最初の一手だけは早く」と決めておくと流れが変わります。"],["成長のヒント","自分を癒す時間を、予定に入れてください。「言いにくいことを穏やかに伝える」技術が身につくと、優しさが守られ、あなたの支えは一段と力を持ちます。"]]};
+const PQX=[
+ ['大事な決断をするとき。','利点と欠点を書き出して比べる。','「これだ」という胸の感覚を信じる。'],
+ ['仲間が大きな失敗をしました。','原因を分析し、再発を防ぐ方法を考える。','まず気持ちに寄り添って、励ます。'],
+ ['心に残る冒険譚はどちらですか。','頭脳戦で逆転する物語。','絆と涙で胸が熱くなる物語。'],
+ ['敵が降伏を申し出ました。','条件と今後の影響を冷静に検討する。','相手の表情や声から本心を見極めて決める。'],
+ ['仲間の作戦に穴を見つけました。','遠慮せず、はっきり指摘する。','相手の気持ちを考え、言い方を選んで伝える。'],
+ ['仲間を新しく誘うなら。','実績と能力を見て選ぶ。','一緒にいて心地よいかで選ぶ。'],
+ ['山賊に襲われた村を見て、まず思うのは。','再び襲われない仕組みをどう作るか。','怯えている人をどう安心させるか。'],
+ ['旅の道具を選ぶなら。','性能と費用を比べて、最も効率の良いものを選ぶ。','見た目や思い入れに惹かれるものを選ぶ。'],
+ ['予言者に「この先は危険だ」と告げられました。','何が根拠かを尋ねて、確かめる。','胸騒ぎがするなら、素直に従う。'],
+ ['仲間との別れが近づいた夜。','次に会うまでの計画を具体的に立てる。','思い出を語り合って、気持ちを分かち合う。']
+];
+const PQW=[
+ ['酒場に入ると、知らない冒険者たちが盛り上がっています。','声をかけて輪に入る。','隅の席から様子を見て過ごす。'],
+ ['大きな手柄を立てました。','皆の前で称えられるのが嬉しい。','静かに報酬を受け取れればそれでいい。'],
+ ['パーティの中での居場所はどちらですか。','前に立って皆をまとめる。','後ろから全体を支える。'],
+ ['長い旅のあと、いちばん回復するのは。','仲間と騒いで笑う時間。','ひとりで静かに過ごす時間。'],
+ ['初対面の依頼主と会います。','自分から話しかけて、場を和ませる。','相手が話し出すのを待って、耳を傾ける。'],
+ ['祭りの夜、あなたは。','踊りの輪の真ん中で騒ぐ。','屋台の端で、人の流れを眺める。'],
+ ['知らない土地の情報を集めるなら。','酒場で大勢に聞いて回る。','図書館や記録を静かに調べる。'],
+ ['作戦を決める場で。','思いついたら、すぐ口に出す。','頭の中で整えてから、必要なときに話す。'],
+ ['仲間が落ち込んでいるとき。','声をかけて、明るく引っ張り上げる。','何も言わず、そばにいて待つ。'],
+ ['名前が広まることについて。','名を上げて、多くの人に知られたい。','名は知られなくていい。信頼できる少数に知られれば十分。']
+];
+const Q=[...PQX.map(q=>({part:'X',s:q[0],a:q[1],b:q[2]})),...PQW.map(q=>({part:'W',s:q[0],a:q[1],b:q[2]}))];
+const N=Q.length;
+const LAB={R:'理',E:'情',Y:'陽',I:'陰'};
+let job=null, idx=0, ans=[];
+const app=document.getElementById('app');
+const JOB_CODES=['DJ','DK','SJ','SK'];
+
+function jobpickHTML(){
+  return `<div class="jobpick" role="group" aria-label="職業を選ぶ">
+    ${JOB_CODES.map(k=>{const t=TYPES[k];return `<button class="jcell t-${t.cls}" data-k="${k}">${ICON[k]}<b>${t.name}</b><small>${t.tag}</small></button>`}).join('')}
+  </div>`;
+}
+
+function showStart(){
+  job=null; idx=0; ans=[];
+  document.body.removeAttribute('data-job');
+  app.innerHTML=`<section class="start">
+    <div class="eyebrow">冒険者ギルド　詳細鑑定窓口</div>
+    <h1>詳細版 ギルド適性検査</h1>
+    <p class="lead">ご購入ありがとうございます。まず、無料診断で出たあなたの職業を選んでください。そのあと20の質問に答えると、4つの職業がさらに16のタイプに分かれます。所要時間は約4分です。</p>
+    ${jobpickHTML()}
+  </section>`;
+  app.querySelectorAll('.jcell').forEach(b=>{
+    b.onclick=()=>{ job=b.dataset.k; document.body.dataset.job=job; idx=0; ans=[]; showQ(); };
+  });
+}
+
+function showQ(justAnswered){
+  const q=Q[idx];
+  const pips=Q.map((_,i)=>{
+    let c=i<idx?'done':i===idx?'now':'';
+    if(justAnswered&&i===idx-1) c+=' pop';
+    return `<i class="${c}"></i>`;
+  }).join('');
+  const partLabel=q.part==='X'?'その1：理性と感情':'その2：陽と陰';
+  app.innerHTML=`<section>
+    <div class="qhead"><span class="eyebrow">詳細診断　${partLabel}</span><span class="qnum">問 ${idx+1} / ${N}</span></div>
+    <div class="pips" aria-hidden="true">${pips}</div>
+    <h2 class="scene">${q.s}</h2>
+    <div class="opts">
+      <button class="opt" data-p="A">${q.a}</button>
+      <button class="opt" data-p="B">${q.b}</button>
+    </div>
+    <button class="back" id="back" ${idx===0?'disabled':''}>← ひとつ前の質問に戻る</button>
+  </section>`;
+  app.querySelectorAll('.opt').forEach(b=>{
+    b.onclick=()=>{
+      b.classList.add('picked');
+      app.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+      ans[idx]=b.dataset.p;
+      setTimeout(()=>{ idx++; idx<N?showQ(true):showResult(); },220);
+    };
+  });
+  document.getElementById('back').onclick=()=>{ if(idx>0){idx--;showQ();} };
+  window.scrollTo(0,0);
+}
+
+function calc(){
+  const ax=ans.slice(0,10), aw=ans.slice(10,20);
+  const cx=ax.filter(p=>p==='A').length, cw=aw.filter(p=>p==='A').length;
+  const re = cx>=6?'R':cx<=4?'E':(ax[9]==='A'?'R':'E');
+  const yi = cw>=6?'Y':cw<=4?'I':(aw[9]==='A'?'Y':'I');
+  return {re,yi,px:Math.round(cx/10*100),pw:Math.round(cw/10*100)};
+}
+
+function bar(l,r,pct){
+  return `<div><div class="bar-l"><span>${l} ${pct}%</span><span>${r} ${100-pct}%</span></div>
+  <div class="track"><div class="fill" data-w="${pct}"></div></div></div>`;
+}
+
+function showResult(){
+  const {re,yi,px,pw}=calc();
+  const key=job+re+yi;
+  const t=TYPES[job], s=SUB[key], rep=REPORT[job];
+  app.innerHTML=`<section class="t-${t.cls}">
+    <div class="res-top">
+      <div class="eyebrow">詳細鑑定の結果</div>
+      <div class="badge">${ICON[job]}</div>
+      <div class="chip">${LAB[re]}×${LAB[yi]}</div>
+      <div class="jobline">${t.name}（${t.tag}）の、さらに詳しいタイプは</div>
+      <h1>${s.n}</h1>
+      <div class="tag">${s.t}</div>
+    </div>
+    <div class="sec"><span class="lab">傾向</span><h3>2つの詳細軸</h3>
+      <div class="bars">${bar('理性で判断','感情で判断',px)}${bar('表に立つ','裏で支える',pw)}</div>
+    </div>
+    <div class="sec"><span class="lab">人物像</span><h3>${s.n}のあなた</h3><p>${s.d}</p></div>
+    ${rep.map(([h,p])=>`<div class="sec"><h3>${h}</h3><p>${p}</p></div>`).join('')}
+    <div class="sec two">
+      <div class="pair"><span class="k">最高の相棒</span><b>${t.mate}</b><p>${t.mateWhy}</p></div>
+      <div class="pair"><span class="k">ぶつかりやすい相手</span><b>${t.clash}</b><p>${t.clashWhy}</p></div>
+    </div>
+    <div class="foot row">
+      <button class="btn ghost" id="editLast">最後の質問に戻ってやり直す</button>
+      <button class="btn" id="again">職業選びからやり直す</button>
+      <a class="btn ghost" id="share" target="_blank" rel="noopener">Xで共有</a>
+      <button class="btn ghost" id="copy">結果をコピー</button>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <p class="note">娯楽用の診断です。実際の性格や適性を測るものではありません。</p>
+    <p class="back-home"><a href="./">← 無料版の診断トップに戻る</a></p>
+  </section>`;
+  document.getElementById('editLast').onclick=()=>{ idx=N-1; showQ(); };
+  document.getElementById('again').onclick=showStart;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    app.querySelectorAll('.fill').forEach(el=>{ el.style.width=el.dataset.w+'%'; });
+  }));
+  const shareText=`ギルド適性検査 詳細版の結果は「${s.n}（${s.t}）」でした！ #ギルド適性検査`;
+  document.getElementById('share').href='https://twitter.com/intent/tweet?text='+encodeURIComponent(shareText)+'&url='+encodeURIComponent(location.href.split('#')[0]);
+  document.getElementById('copy').onclick=()=>{
+    const text=`ギルド適性検査 詳細版の結果：${s.n}（${s.t}）\n${t.name} / ${LAB[re]}×${LAB[yi]}\n${s.d}`;
+    const toast=document.getElementById('toast');
+    const ok=()=>toast.textContent='結果をコピーしました。';
+    const ng=()=>{toast.textContent='コピーできませんでした。次の文章を選択してコピーしてください：'+text.replace(/\n/g,' ');};
+    try{ navigator.clipboard.writeText(text).then(ok,ng); }catch(e){ ng(); }
+  };
+  window.scrollTo(0,0);
+}
+
+showStart();
+</script>
+</body>
+</html>
